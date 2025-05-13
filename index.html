@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrat PPA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Asap&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+    .contract {
+      position: relative;
+    }
+    #ppa {
+      max-width: 600px;
+      border: 4px solid #e9b72e;
+      border-radius: 12px;
+    }
+    .overlay-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+        #nameOverlay {
+      top: 43%;
+      font-size: 47px;
+      font-family: 'Great Vibes', cursive;
+      color: #e9b72e;
+    }
+    #dateOverlay {
+      top: 60%;
+      font-size: 11.3px;
+      font-family: 'Asap', sans-serif;
+      color: #3b3a3a;
+    }
+    #signedOverlay {
+      top: 79.6%;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: 'Asap', sans-serif;
+      color: #3b3a3a;
+    }
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input, button, select {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+    .btn {
+      background-color: #e9b72e;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .input-group {
+      display: flex;
+      gap: 5px;
+    }
+    .signature-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .signature-select-wrapper {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    #signatureSelectButton {
+      background-color: #e9b72e;
+      color: black;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .signature-options {
+      display: none;
+      flex-direction: column;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+    .signature-options button {
+      background: none;
+      border: none;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .signature-options button:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="inputs">
+      <input type="text" id="nameInput" placeholder="Nom">
+      <div class="input-group">
+        <input type="text" id="dateInput" placeholder="Date" readonly>
+        <button class="btn" onclick="setDate()">📅</button>
+      </div>
+      <div class="signature-wrapper">
+        <div class="input-group">
+          <input type="text" id="signedInput" placeholder="Signature du formateur">
+          <button id="signatureSelectButton" onclick="toggleSignatureOptions()">📝</button>
+        </div>
+        <div class="signature-options" id="signatureOptions">
+          <button onclick="selectSignature('Mathieu Gerrin')">Mathieu Gerrin</button>
+          <button onclick="selectSignature('Wiley Tucker')">Wiley Tucker</button>
+          <button onclick="selectSignature('Thomas Davis')">Thomas Davis</button>
+        </div>
+      </div>
+      <button class="btn" onclick="downloadImage()">Télécharger le PPA</button>
+    </div>
+    <div class="contract" id="contract">
+      <div class="overlay-text" id="nameOverlay"></div>
+      <div class="overlay-text" id="dateOverlay"></div>
+      <div class="overlay-text" id="signedOverlay"></div>
+      <img src="assets/ppa.png" id="ppa" alt="PPA">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const nameInput = document.getElementById("nameInput");
+    const dateInput = document.getElementById("dateInput");
+    const signedInput = document.getElementById("signedInput");
+    const signatureOptions = document.getElementById("signatureOptions");
+
+    nameInput.addEventListener("input", () => {
+      document.getElementById("nameOverlay").textContent = nameInput.value;
+    });
+
+    signedInput.addEventListener("input", () => {
+      document.getElementById("signedOverlay").textContent = signedInput.value.toUpperCase();
+    });
+
+    function toggleSignatureOptions() {
+      signatureOptions.style.display = signatureOptions.style.display === "flex" ? "none" : "flex";
+    }
+
+    function selectSignature(name) {
+      signedInput.value = name;
+      document.getElementById("signedOverlay").textContent = name.toUpperCase();
+      signatureOptions.style.display = "none";
+    }
+
+    function setDate() {
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const formattedDate = today.toLocaleDateString("fr-FR", options);
+      dateInput.value = formattedDate;
+      document.getElementById("dateOverlay").textContent = "Pour avoir participé à la Formation PPA réalisé par les Sheriffs le " + formattedDate + ".";
+    }
+
+    function downloadImage() {
+      html2canvas(document.getElementById("contract")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "ppa_modifie.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>

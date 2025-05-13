@@ -31,7 +31,7 @@ window.setDate = function () {
 
 window.downloadImage = function () {
   const nom = nameInput.value.trim() || "non_renseigne";
-  const fileName = `ppa.${nom}.png`;
+  const fileName = `PPA.${nom}.png`;
 
   console.log("Sa marche zebi");
 

@@ -1,0 +1,110 @@
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      padding: 20px;
+    }
+    .contract {
+      position: relative;
+    }
+    #ppa {
+      max-width: 600px;
+      border: 4px solid #e9b72e;
+      border-radius: 12px;
+      display: block;
+    }
+    .overlay-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+    #nameOverlay {
+      top: 43%;
+      font-size: 47px;
+      font-family: 'Great Vibes', cursive;
+      color: #e9b72e;
+    }
+    #dateOverlay {
+      top: 60%;
+      font-size: 11.3px;
+      font-family: 'Asap', sans-serif;
+      color: #3b3a3a;
+    }
+    #signedOverlay {
+      top: 79.6%;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: 'Asap', sans-serif;
+      color: #3b3a3a;
+    }
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+    .btn {
+      background-color: #e9b72e;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .input-group {
+      display: flex;
+      gap: 5px;
+    }
+    .signature-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .signature-select-wrapper {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    #signatureSelectButton {
+      background-color: #e9b72e;
+      color: black;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    .signature-options {
+      display: none;
+      flex-direction: column;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+    .signature-options button {
+      background: none;
+      border: none;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .signature-options button:hover {
+      background-color: #f0f0f0;
+    }
